@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Commute Tax — Drive-Till-You-Qualify, Priced Honestly</title>
+<meta name="description" content="The cheaper house far away often costs more. Price the mortgage AND the drive — miles, fuel, wear, tolls, and your hours — in one true monthly number.">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-32.png"><link rel="apple-touch-icon" href="icons/icon-180.png">
+<style>
+:root{--bg:#160D0D;--surface:#221214;--surface2:#2B1719;--text:#F3EDE2;--muted:#C9B8A8;--gold:#C19A4B;--ox:#8A2E2E;--oxbright:#C04545;--line:#4A2E2A}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.5}
+.wrap{max-width:1060px;margin:0 auto;padding:20px 16px 60px}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-size:.72rem;text-align:center}
+h1{font-size:clamp(2.2rem,6vw,3.8rem);text-align:center;margin:.15em 0 .1em;line-height:1.05}
+.sub{text-align:center;color:var(--muted);max-width:680px;margin:0 auto 8px;font-style:italic}
+.rule{border:none;border-top:3px double var(--gold);margin:18px 0}
+.hero{background:var(--surface);border:1px solid var(--gold);padding:22px;text-align:center;margin:18px 0}
+.hero .big{font-size:clamp(2rem,6vw,3.4rem);color:var(--oxbright);font-weight:bold;line-height:1.1}
+.hero .verdict{font-size:1.25rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-top:6px}
+.hero p{color:var(--muted);max-width:640px;margin:10px auto 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);padding:18px}
+.card h2{margin:0 0 4px;font-size:1.35rem;color:var(--gold)}
+.card h3{margin:0 0 10px;font-size:1.05rem;color:var(--gold);letter-spacing:.04em;text-transform:uppercase}
+label{display:block;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:12px 0 4px}
+input,select{width:100%;padding:10px;background:#160D0D;border:1px solid var(--line);color:var(--text);font-family:inherit;font-size:1rem}
+input:focus{outline:1px solid var(--gold)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+table{width:100%;border-collapse:collapse;margin-top:8px}th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:left}th{color:var(--gold);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+.win{color:var(--gold);font-weight:bold}.lose{color:var(--oxbright);font-weight:bold}
+.btn{background:var(--ox);color:var(--gold);border:1px solid var(--gold);padding:12px 18px;font-family:inherit;font-size:1rem;cursor:pointer;letter-spacing:.05em}
+.btn.secondary{background:transparent;color:var(--text)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.note{color:var(--muted);font-size:.9rem}.metric{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dotted var(--line)}
+.metric b{font-variant-numeric:tabular-nums}.red{color:var(--oxbright)}
+.saved{font-size:.92rem}.saved div{padding:8px;border:1px solid var(--line);margin:6px 0;display:flex;justify-content:space-between;gap:8px}
+footer{color:var(--muted);font-size:.85rem;text-align:center;margin-top:28px}
+</style></head><body><div class="wrap">
+<div class="eyebrow">The Bull Brew · Daily Tool</div>
+<h1>The Commute Tax</h1>
+<p class="sub">“Drive till you qualify” sounds clever — until you price the drive. The cheaper house is only cheaper if the road doesn’t eat the savings.</p>
+<hr class="rule">
+<div class="hero"><div class="eyebrow">True monthly gap · Far house vs close house</div><div class="big" id="heroGap">$—</div><div class="verdict" id="heroVerdict">Enter both houses</div><p id="heroText">Housing plus commute, honest on both sides: mortgage, tax, insurance, miles, wear, tolls — and the hours of your life behind the wheel.</p></div>
+
+<div class="grid">
+<div class="card"><h2>House A — The Close One</h2><label>Name</label><input id="aName" value="Close to work">
+<div class="row"><div><label>Price $</label><input id="aPrice" type="number" value="625000"></div><div><label>One-way miles</label><input id="aMiles" type="number" value="8" step="0.5"></div></div>
+<label>HOA $/mo</label><input id="aHoa" type="number" value="0"></div>
+
+<div class="card"><h2>House B — The Far One</h2><label>Name</label><input id="bName" value="Cheaper, farther out">
+<div class="row"><div><label>Price $</label><input id="bPrice" type="number" value="475000"></div><div><label>One-way miles</label><input id="bMiles" type="number" value="42" step="0.5"></div></div>
+<label>HOA $/mo</label><input id="bHoa" type="number" value="45"></div>
+</div>
+
+<div class="grid" style="margin-top:16px">
+<div class="card"><h3>The Loan — Same For Both</h3>
+<div class="row"><div><label>Down payment %</label><input id="downPct" type="number" value="20" step="0.5"></div><div><label>Rate %</label><input id="rate" type="number" value="6.75" step="0.05"></div></div>
+<div class="row"><div><label>Property tax % / yr</label><input id="taxPct" type="number" value="1.15" step="0.05"></div><div><label>Insurance $ / yr</label><input id="insYr" type="number" value="2400"></div></div>
+<label>Term (years)</label><input id="term" type="number" value="30"></div>
+
+<div class="card"><h3>The Drive — Price It Like It Matters</h3>
+<div class="row"><div><label>Commute days / week</label><input id="days" type="number" value="5" step="0.5" min="0" max="7"></div><div><label>Commuters</label><input id="commuters" type="number" value="1" min="1" max="4"></div></div>
+<div class="row"><div><label>Driving cost $ / mile</label><input id="perMile" type="number" value="0.70" step="0.01"></div><div><label>Your time $ / hour</label><input id="hourly" type="number" value="35"></div></div>
+<div class="row"><div><label>Avg speed mph</label><input id="speed" type="number" value="38"></div><div><label>Tolls + parking $ / day</label><input id="tolls" type="number" value="4" step="0.5"></div></div>
+<p class="note">Per-mile default is the IRS-style all-in figure (fuel, wear, tires, depreciation). Time is not free — price your hours or the far house wins on a lie.</p></div>
+</div>
+
+<hr class="rule">
+<div class="grid">
+<div class="card"><h3 id="aHead">House A — True Cost</h3><div id="aOut"></div></div>
+<div class="card"><h3 id="bHead">House B — True Cost</h3><div id="bOut"></div></div>
+</div>
+
+<div class="card" style="margin-top:16px"><h3>The Long Toll</h3><div id="longOut"></div>
+<table><thead><tr><th>Commute days / wk</th><th>A true $/mo</th><th>B true $/mo</th><th>Gap (B − A)</th><th>Winner</th></tr></thead><tbody id="sensBody"></tbody></table>
+<p class="note">Hybrid work is the far house’s only real defence. Watch the gap flip as days drop — if it only works at two days a week, you are betting the house on your employer’s mood.</p></div>
+
+<div class="actions"><button class="btn" id="saveBtn">Save comparison</button><button class="btn secondary" id="copyBtn">Copy summary</button></div>
+<div class="card"><h3>Saved Comparisons</h3><div class="saved" id="savedList"><span class="note">None saved yet.</span></div></div>
+
+<hr class="rule"><div class="card"><h3>The Method</h3><p>1. <b>Never compare prices. Compare true monthly costs.</b> A $150,000 “saving” spread over 30 years is a few hundred a month — a long commute can burn that before breakfast.</p><p>2. <b>Miles are a bill, not a feeling.</b> Every mile costs fuel, wear and a slice of the car’s life, whether you feel it that day or not.</p><p>3. <b>Time is the silent tax.</b> An extra hour a day is 250+ hours a year — more than six working weeks — spent unpaid, in traffic, for a house.</p><p>4. <b>Breakeven tells the truth.</b> Below, the app solves the far house’s breakeven price: what it would have to cost for the drive to actually be worth it.</p></div>
+<footer>The Commute Tax · A Bull Brew daily tool · Estimates only, not financial advice. Your mileage — literally — may vary.</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id); const fmt=n=>'$'+Math.round(n).toLocaleString('en-US'); const fmt2=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+function num(id,d){const v=parseFloat($(id).value);return isNaN(v)?d:v}
+function pi(price){const down=num('downPct',20)/100,loan=price*(1-down),r=num('rate',6.75)/100/12,n=num('term',30)*12; if(r<=0)return loan/n; const f=Math.pow(1+r,n); return loan*r*f/(f-1)}
+function calc(price,miles,hoa,days){
+ const housing=pi(price)+price*(num('taxPct',1.15)/100)/12+num('insYr',2400)/12+hoa;
+ const tripsPerMonth=days*52/12; const monthlyMiles=miles*2*tripsPerMonth*num('commuters',1);
+ // vehicle cost is per vehicle; assume commuters share timing but if 2 commuters in same household driving separately, miles multiply — kept as entered
+ const vehicle=monthlyMiles*num('perMile',0.70);
+ const hours=monthlyMiles/Math.max(10,num('speed',38));
+ const timeCost=hours*num('hourly',35);
+ const tolls=num('tolls',4)*tripsPerMonth*num('commuters',1);
+ const commute=vehicle+timeCost+tolls;
+ return {housing,vehicle,timeCost,tolls,commute,total:housing+commute,monthlyMiles,hours};
+}
+function render(){
+ const days=num('days',5);
+ const A=calc(num('aPrice',0),num('aMiles',0),num('aHoa',0),days);
+ const B=calc(num('bPrice',0),num('bMiles',0),num('bHoa',0),days);
+ $('aHead').textContent=($('aName').value||'House A')+' — True Cost'; $('bHead').textContent=($('bName').value||'House B')+' — True Cost';
+ const block=(X)=>'<div class="metric"><span>Housing (P&I + tax + ins + HOA)</span><b>'+fmt(X.housing)+'</b></div><div class="metric"><span>Vehicle ('+Math.round(X.monthlyMiles).toLocaleString()+' mi/mo)</span><b>'+fmt(X.vehicle)+'</b></div><div class="metric"><span>Your time ('+X.hours.toFixed(1)+' hrs/mo)</span><b class="red">'+fmt(X.timeCost)+'</b></div><div class="metric"><span>Tolls + parking</span><b>'+fmt(X.tolls)+'</b></div><div class="metric"><span>Commute subtotal</span><b class="red">'+fmt(X.commute)+'</b></div><div class="metric"><span><b>TRUE MONTHLY COST</b></span><b>'+fmt(X.total)+'</b></div>';
+ $('aOut').innerHTML=block(A); $('bOut').innerHTML=block(B);
+ const gap=B.total-A.total; const abs=Math.abs(gap);
+ $('heroGap').textContent=(gap>=0?'+':'−')+fmt(abs).slice(0)+' / mo for the far house';
+ // fmt already includes $; fix double handling:
+ $('heroGap').textContent=(gap>=0?'+':'−')+fmt(abs).replace('$','$')+' / mo';
+ if(abs<75){$('heroVerdict').textContent='A WASH — DECIDE ON THE LIFE, NOT THE MATH'; $('heroText').textContent='The two true costs are within $75/mo. Buy the street, the schools and the evenings you prefer — the spreadsheet has no opinion left.'}
+ else if(gap>0){$('heroVerdict').textContent='THE CHEAPER HOUSE IS A MIRAGE'; $('heroText').textContent='The far house looks '+fmt(num('aPrice',0)-num('bPrice',0))+' cheaper on the listing. Priced honestly, it costs '+fmt(gap)+' MORE every month — '+fmt(gap*12)+' a year, '+fmt(gap*120)+' over ten years — paid in fuel, wear and hours you will never get back.'}
+ else {$('heroVerdict').textContent='WORTH THE DRIVE — THIS TIME'; $('heroText').textContent='Even after pricing every mile and every hour, the far house still saves '+fmt(abs)+' a month ('+fmt(abs*12)+' a year). That is a real saving, not a mirage — bank it, don’t lifestyle-creep it away.'}
+ // breakeven price for B: solve price where B.total == A.total. Housing is linear-ish in price except PI; binary search
+ let lo=0,hi=num('aPrice',0)*1.5+500000;
+ for(let i=0;i<50;i++){const mid=(lo+hi)/2; const t=calc(mid,num('bMiles',0),num('bHoa',0),days).total; if(t<A.total) lo=mid; else hi=mid}
+ const be=(lo+hi)/2; const extraMiles=Math.max(0,num('bMiles',0)-num('aMiles',0));
+ const perExtraMile = extraMiles>0 ? (B.commute-A.commute)/(extraMiles*2*days*52/12) : 0;
+ $('longOut').innerHTML='<div class="metric"><span>10-year true-cost gap (B − A)</span><b class="red">'+fmt(gap*120)+'</b></div><div class="metric"><span>Extra hours on the road / year (B vs A)</span><b>'+Math.round((B.hours-A.hours)*12).toLocaleString()+' hrs</b></div><div class="metric"><span>Extra miles / year (B vs A)</span><b>'+Math.round((B.monthlyMiles-A.monthlyMiles)*12).toLocaleString()+' mi</b></div><div class="metric"><span>Effective cost per extra one-way mile</span><b>'+(extraMiles>0?('$'+perExtraMile.toFixed(2)+' per mile driven'):'—')+'</b></div><div class="metric"><span>Breakeven price for the far house</span><b>'+fmt(be)+'</b></div><div class="metric"><span>Far house listed at</span><b>'+fmt(num('bPrice',0))+' — '+(num('bPrice',0)>be?fmt(num('bPrice',0)-be)+' ABOVE breakeven':'BELOW breakeven by '+fmt(be-num('bPrice',0)))+'</b></div>';
+ let rows=''; [1,2,3,4,5].forEach(d=>{const a2=calc(num('aPrice',0),num('aMiles',0),num('aHoa',0),d); const b2=calc(num('bPrice',0),num('bMiles',0),num('bHoa',0),d); const g=b2.total-a2.total; rows+='<tr><td>'+d+' day'+(d>1?'s':'')+'</td><td>'+fmt(a2.total)+'</td><td>'+fmt(b2.total)+'</td><td class="'+(g>0?'lose':'win')+'">'+(g>=0?'+':'−')+fmt(Math.abs(g))+'</td><td>'+(Math.abs(g)<75?'Wash':(g>0?'Close house':'Far house'))+'</td></tr>'});
+ $('sensBody').innerHTML=rows;
+ window._summary='THE COMMUTE TAX\n'+($('aName').value)+' ('+fmt(num('aPrice',0))+', '+num('aMiles',0)+' mi): true cost '+fmt(A.total)+'/mo (housing '+fmt(A.housing)+' + commute '+fmt(A.commute)+')\n'+($('bName').value)+' ('+fmt(num('bPrice',0))+', '+num('bMiles',0)+' mi): true cost '+fmt(B.total)+'/mo (housing '+fmt(B.housing)+' + commute '+fmt(B.commute)+')\nGap: '+(gap>=0?'far house costs '+fmt(gap)+' MORE':'far house saves '+fmt(Math.abs(gap)))+'/mo · 10-yr '+fmt(Math.abs(gap)*120)+'\nBreakeven price for far house: '+fmt(be);
+}
+document.querySelectorAll('input').forEach(el=>el.addEventListener('input',render));
+function loadSaved(){try{return JSON.parse(localStorage.getItem('commuteTax')||'[]')}catch(e){return[]}}
+function drawSaved(){const s=loadSaved(); $('savedList').innerHTML=s.length?s.map((x,i)=>'<div><span><b>'+x.name+'</b> — '+x.summary+'</span><button class="btn secondary" data-del="'+i+'">Delete</button></div>').join(''):'<span class="note">None saved yet.</span>'; document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const a=loadSaved();a.splice(+b.dataset.del,1);localStorage.setItem('commuteTax',JSON.stringify(a));drawSaved()})}
+$('saveBtn').onclick=()=>{const s=loadSaved(); s.push({name:($('bName').value||'Far')+' vs '+($('aName').value||'Close'),summary:window._summary.split('\n')[2]}); localStorage.setItem('commuteTax',JSON.stringify(s)); drawSaved()};
+$('copyBtn').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(window._summary); $('copyBtn').textContent='Copied'; setTimeout(()=>$('copyBtn').textContent='Copy summary',1200)};
+render(); drawSaved();
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script></body></html>
